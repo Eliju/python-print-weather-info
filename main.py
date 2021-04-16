@@ -5,7 +5,7 @@ import json
 import time
 import generic_camunda_client
 from generic_camunda_client.rest import ApiException
-import EmailSender
+import email_sender
 
 
 def get_configs(file_name):
@@ -59,7 +59,7 @@ def run_print_weather():
         except ApiException as e:
             print("Exception when calling ExternalTaskApi->fetch_and_lock: %s\n" % e)
             return
-        EmailSender.send_email(city_name, weather)
+        email_sender.send_email(city_name, weather)
 
         try:
             complete_external_task_dto = {"workerId": "getWeatherPrinterWorker",
